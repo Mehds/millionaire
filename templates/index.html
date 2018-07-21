@@ -1,0 +1,30 @@
+<!doctype html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script type="text/javascript" src="{{ url_for('static', filename='js/millionaire.js') }}"></script>
+
+	<title>Welcome to the millionaire project</title>
+
+</head>
+<body>
+	<form id="forex">
+	<div class="form-group">
+	 	<label for="amount">Amount</label>
+	  	<input type="number" class="form-control" id="amount">
+
+		<label for="currency-selector">Currency</label>
+		<select class="form-control currency-selector" id="currency-selector"></select>
+
+		<br>
+
+		<input type="submit" class="btn btn-primary" value="Find out!">
+
+	</div>
+</body>
