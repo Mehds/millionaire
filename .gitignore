@@ -1,0 +1,8 @@
+#ignore pyc files
+*.pyc
+#ignore venv setup
+lib64
+bin
+lib
+share
+pyvenv.cfg
