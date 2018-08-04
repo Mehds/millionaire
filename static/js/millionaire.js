@@ -169,11 +169,40 @@ $( document ).ready(function() {
 	for (currency in currencyCodes){
 		selector.append("<option>" + currency + "</option>");
 	}
+
 });
 
-$("#forex-form").submit(function (event) {
-  alert("submitting");
+// $("#forex-form").submit(function (event) {
+//   alert("submitting");
 
-  console.log(event);
-  event.preventDefault();
+//   console.log(event);
+//   event.preventDefault();
+// });
+
+$(function (){
+  $('#convert').bind('click', function() {
+
+    console.log('sanity checked');
+    $("#results").hide();
+    $("tbody tr").remove();
+
+    $.getJSON('/convert', {
+      amount: $('#amount').val(),
+      currency: $('#currency option:selected').val()}, function(data) {
+        console.log(data);
+        $("#results").show();
+        var outputTable = $("#results tbody")[0];
+        var count = 0;
+        for (var key in data) {
+          var newRow = outputTable.insertRow(count);
+
+          newRow.insertCell(0).innerText = ++count;
+          newRow.insertCell(1).innerText = data[key]["name"] // TODO compute the amounts
+          newRow.insertCell(2).innerText = data[key]["amount"].toFixed(2);
+          newRow.insertCell(3).innerText = data[key]["countries"].toString();
+        }
+      });
+    return false;
+    });
 });
+// });

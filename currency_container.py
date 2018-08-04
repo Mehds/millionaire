@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 
 class CurrencyContainer(object):
 	"""Main interaction with my Exchange rate data"""
@@ -7,7 +8,7 @@ class CurrencyContainer(object):
 		with open('./data/complete_data.json') as f:
 			self.currencies = json.load(f)
 
-	def get_currency_shorthands():
+	def get_currency_shorthands(self):
 		return list(self.currencies)
 
 	# properties are name, countries, country_codes, rate
@@ -36,7 +37,12 @@ class CurrencyContainer(object):
 		return amount / self.get_rate(init_currency) * self.get_rate(target_currency)
 
 	def get_millionaire(self, amount, init_currency):
-		return {k: self.currencies[k] for k in self.currencies if self.convert(amount, init_currency, k) > 1000000}
+		temp = {k: self.currencies[k] for k in self.currencies if self.convert(amount, init_currency, k) > 1000000}
+
+		for (k, v) in temp.items():
+			v['amount'] = self.convert(amount, init_currency, k)
+
+		return OrderedDict(sorted(temp.items(), key=lambda t: t[1]['amount'], reverse=True))
 
 	def get_billionaire(self, amount, init_currency):
 		return {k: self.currencies[k] for k in self.currencies if self.convert(amount, init_currency, k) > 1000000000}
