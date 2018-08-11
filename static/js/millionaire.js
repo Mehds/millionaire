@@ -173,10 +173,9 @@ $( document ).ready(function() {
 $(function (){
   $('#convert').bind('click', function() {
 
-    console.log('sanity checked');
     $("#results").hide();
     $("tbody tr").remove();
-
+    map.updateChoropleth({reset: true});
     $.getJSON('/convert', {
       amount: $('#amount').val(),
       currency: $('#currency option:selected').val()}, function(data) {
