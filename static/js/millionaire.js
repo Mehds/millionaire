@@ -1,9 +1,7 @@
 
 
 $( document ).ready(function() {
-	console.log("ready!");
 	var selector = $('.currency-selector');
-	console.log(selector);
   var currencyCodes = {
   "AED":{"label":"United Arab Emirates dirham"},
   "AFN":{"label":"Afghan afghani"},
@@ -172,13 +170,6 @@ $( document ).ready(function() {
 
 });
 
-// $("#forex-form").submit(function (event) {
-//   alert("submitting");
-
-//   console.log(event);
-//   event.preventDefault();
-// });
-
 $(function (){
   $('#convert').bind('click', function() {
 
@@ -193,16 +184,26 @@ $(function (){
         $("#results").show();
         var outputTable = $("#results tbody")[0];
         var count = 0;
+        var highlightedCountries = {};
+
         for (var key in data) {
           var newRow = outputTable.insertRow(count);
 
           newRow.insertCell(0).innerText = ++count;
           newRow.insertCell(1).innerText = data[key]["name"] // TODO compute the amounts
           newRow.insertCell(2).innerText = data[key]["amount"].toFixed(2);
+
           newRow.insertCell(3).innerText = data[key]["countries"].toString();
+
+          var countryCodes = data[key]["country_codes_alpha3"];
+          for (var i = 0; i < countryCodes.length; i++){
+            highlightedCountries[countryCodes[i]] = 'green';  
+          }
         }
+
+        console.log(highlightedCountries);
+        map.updateChoropleth(highlightedCountries);
       });
     return false;
     });
 });
-// });

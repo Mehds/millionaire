@@ -10,10 +10,25 @@
 
 	<script type="text/javascript" src="{{ url_for('static', filename='js/millionaire.js') }}"></script>
 
+	<!-- Map setup -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+
+	<script type="text/javascript" src="{{ url_for('static', filename='js/datamaps.world.min.js') }}"></script>
+
 	<title>Welcome to the millionaire project</title>
 
 </head>
 <body>
+
+	<div id="container" style="position: relative; width: 800px; height: 600px;"></div>
+	<script>
+	    var map = new Datamap({element: document.getElementById('container'), 
+	    	fills: {MILL: 'green', BILL: 'blue', defaultFill: 'orange'},         
+	    	geographyConfig: {highlightOnHover: false}});
+	</script>
+
  	<label for="amount">Amount</label>
   	<input id="amount" type="number" class="form-control" id="amount">
 

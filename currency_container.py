@@ -5,7 +5,7 @@ class CurrencyContainer(object):
 	"""Main interaction with my Exchange rate data"""
 	
 	def __init__(self):
-		with open('./data/complete_data.json') as f:
+		with open('./data/fixed_data.json') as f:
 			self.currencies = json.load(f)
 
 	def get_currency_shorthands(self):
