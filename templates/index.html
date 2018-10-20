@@ -1,5 +1,15 @@
 <!doctype html>
 <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Millionaire status check">
+    <meta name="author" content="Mehdi OUlmakki">
+<!--     <link rel="icon" href="../../favicon.ico">
+ -->
+	<!-- External -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -8,36 +18,41 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-	<script type="text/javascript" src="{{ url_for('static', filename='js/millionaire.js') }}"></script>
 
 	<!-- Map setup -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
 
+
+	<!-- Local JS -->
+	<script type="text/javascript" src="{{ url_for('static', filename='js/millionaire.js') }}"></script>
+
 	<script type="text/javascript" src="{{ url_for('static', filename='js/datamaps.world.min.js') }}"></script>
 
-	<title>Welcome to the millionaire project</title>
+	<!-- Local CSS -->
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/millionaire.css')}}">
+	<title>Millions</title>
 
 </head>
 <body>
+	<!-- center-screen credit to this SO answer: https://stackoverflow.com/questions/31217268/center-div-on-the-middle-of-screen -->
+	<div class="center-screen" id="Intro">Put in an amount of any curency, and see where in the world you are already a millionaire! Perhaps you've even crossed a billion! </div>
+	<br>
 
-	<div id="container" style="position: relative; width: 800px; height: 600px;"></div>
-	<script>
-	    var map = new Datamap({element: document.getElementById('container'), 
-	    	fills: {MILL: 'green', BILL: 'blue', defaultFill: 'orange'},         
-	    	geographyConfig: {highlightOnHover: false}});
-	</script>
+	<form class="center-screen">
+		<input id="amount" type="number" class="form-control" id="amount" value="10000">
+		<select id="currency" class="form-control currency-selector" id="currency-selector"></select>
+		<input id="convert" type="button" class="btn btn-primary" value="Find out!">
+	</form>
 
- 	<label for="amount">Amount</label>
-  	<input id="amount" type="number" class="form-control" id="amount">
 
-	<label for="currency-selector">Currency</label>
-	<select id="currency" class="form-control currency-selector" id="currency-selector"></select>
+	<div id="container"></div>
 
 	<br>
 
-	<input id="convert" type="button" class="btn btn-primary" value="Find out!">
+	<div id="summary"></div>
 
 	<table id="results" class="table table-striped table-bordered" style="display: none;">
 	  <thead>

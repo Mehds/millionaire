@@ -165,8 +165,14 @@ $( document ).ready(function() {
 };
   console.log(currencyCodes);
 	for (currency in currencyCodes){
-		selector.append("<option>" + currency + "</option>");
+		selector.append("<option>" + currencyCodes[currency]['label'] + " - " + currency +  "</option>");
 	}
+
+  // Set up map:
+  map = new Datamap({element: document.getElementById('container'), 
+    responsive: true,
+  fills: {MILL: 'green', BILL: 'red', defaultFill: 'orange'},         
+  geographyConfig: {highlightOnHover: false}});
 
 });
 
@@ -176,9 +182,11 @@ $(function (){
     $("#results").hide();
     $("tbody tr").remove();
     map.updateChoropleth({reset: true});
+
+    
     $.getJSON('/convert', {
       amount: $('#amount').val(),
-      currency: $('#currency option:selected').val()}, function(data) {
+      currency: $('#currency option:selected').val().split("-")[1].trim()}, function(data) {
         console.log(data);
         $("#results").show();
         var outputTable = $("#results tbody")[0];
